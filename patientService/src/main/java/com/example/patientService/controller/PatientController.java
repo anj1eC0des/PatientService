@@ -31,19 +31,19 @@ public class PatientController {
 
     @PutMapping("/patients/{id}")
     @ResponseBody
-    public Patient updatePatients(@RequestBody int id){
+    public Patient updatePatients(@RequestBody PatientDTO patient, @PathVariable int id){
         return new Patient();
     }
 
     @DeleteMapping("patients/{id}")
     @ResponseBody
-    public String deletePatient(@RequestBody int id){
+    public String deletePatient(@PathVariable int id){
         return "Patient deleted";
     }
 
     @GetMapping("/search?name={name}")
     @ResponseBody
-    public List<Patient> searchPatients(){
+    public List<Patient> searchPatients(@PathVariable String name){
         return new ArrayList<Patient>();
     }
 }
