@@ -3,6 +3,7 @@ package com.example.patientService.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+@Entity
 @Data
 @Table(name="patients")
 public class Patient {

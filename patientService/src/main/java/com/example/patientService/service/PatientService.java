@@ -1,4 +1,4 @@
-package com.example.patientService;
+package com.example.patientService.service;
 
 import com.example.patientService.entity.Patient;
 import com.example.patientService.entity.PatientDTO;
