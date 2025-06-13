@@ -1,38 +1,57 @@
 package com.example.patientService.service;
 
-import com.example.patientService.entity.Patient;
-import com.example.patientService.entity.PatientDTO;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.patientService.entity.Patient;
+import com.example.patientService.entity.PatientDTO;
+import com.example.patientService.repository.PatientRepository;
 
 @Service
 public class PatientService {
-    public Patient creatPatient(PatientDTO patient){
-        //jpa save - repo.save(patient)
-        return new Patient();
+
+    private final PatientRepository patientRepository;
+
+    public PatientService(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
     }
 
-    public List<Patient> listPatients(){
-        // repo.listPatients;
-        return new ArrayList<>();
+    public Patient creatPatient(PatientDTO patient) {
+        Patient p = new Patient();
+        p.setName(patient.getName());
+        p.setAge(patient.getAge());
+        p.setGender(patient.getGender());
+        p.setNumber(patient.getNumber());
+        p.setAddress(patient.getAddress());
+        return patientRepository.save(p);
     }
 
-    public Patient getPatient(int id){
-        //patient find by id
-        return new Patient();
+    public List<Patient> listPatients() {
+        return patientRepository.findAll();
     }
 
-    public Patient updatePatient(int id, PatientDTO patient){
-        return new Patient();
+    public Optional<Patient> getPatient(int id) {
+        return patientRepository.findById(id);
     }
 
-    public int deletePatient(int id){
-        return 0;
+    public Patient updatePatient(int id, PatientDTO patient) {
+        Patient p = new Patient();
+        p.setPatientId(id);
+        p.setName(patient.getName());
+        p.setAge(patient.getAge());
+        p.setGender(patient.getGender());
+        p.setNumber(patient.getNumber());
+        p.setAddress(patient.getAddress());
+        return patientRepository.save(p);
     }
 
-    public Patient searchPatient(String name){
-        return new Patient();
+    public void deletePatient(int id) {
+        patientRepository.deleteById(id);
+    }
+
+    public List<Patient> searchPatient(String name) {
+        return patientRepository.findPatientByName(name);
     }
 }
